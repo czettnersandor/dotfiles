@@ -2,10 +2,9 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-PATH=$PATH
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/zoner/.zshrc'
+zstyle :compinstall filename '/home/sandor/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -53,7 +52,7 @@ bindkey "\e[F" end-of-line
 
 #PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%1~ %{$reset_color%}%# "
 #PROMPT="%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} "
-PROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} '
+PROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%}\n$ '
 
 #PROMPT="%c$(prompt_git_info) %% "
 export EDITOR="vim"
@@ -62,6 +61,7 @@ export EDITOR="vim"
 alias ls='ls -F --color=auto' 
 alias ll='ls -lh'
 alias grep='grep --color=auto'
+alias node='nodejs'
 
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -72,3 +72,7 @@ if which tmux 2>&1 >/dev/null; then
    #if not inside a tmux session, and if no session is started, start a new session
    test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
+
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ssh-add ~/.ssh/id_rsa &> /dev/null
