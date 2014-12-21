@@ -1,0 +1,8 @@
+connman-ui-gtk &
+blueman-applet &
+xbacklight -inc 100 &
+compton -b --opengl --vsync opengl-swc --paint-on-overlay &
+( ( sleep 10 && /usr/bin/xscreensaver -no-splash -display :0.0 ) & )
+xss-lock -- xscreensaver-command -lock &
+unclutter &
+syndaemon -t -k -i 2 &

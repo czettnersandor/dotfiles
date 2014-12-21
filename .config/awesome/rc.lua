@@ -3,6 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
+local blingbling = require("blingbling")
 -- Widget and layout library
 local vicious = require("vicious")
 local wibox = require("wibox")
@@ -11,9 +12,6 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-
--- Load Debian menu entries
-require("debian.menu")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -40,14 +38,44 @@ do
 end
 -- }}}
 
+-- battery warning
+local function trim(s)
+    return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
+end
+
+local function bat_notification()
+    local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
+    local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
+    local bat_capacity = tonumber(f_capacity:read("*all"))
+    local bat_status = trim(f_status:read("*all"))
+
+    if (bat_capacity <= 10 and bat_status == "Discharging") then
+        naughty.notify({ title      = "Battery Warning"
+        , text       = "Battery low! " .. bat_capacity .."%" .. " left!"
+        , fg="#ffffff"
+        , bg="#C91C1C"
+        , timeout    = 15
+         , position   = "top_right"
+        })
+    end
+end
+
+battimer = timer({timeout = 60})
+battimer:connect_signal("timeout", bat_notification)
+battimer:start()
+
+-- end here for battery warning
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/sandor/.config/awesome/themes/sandor/theme.lua")
+home = os.getenv("HOME")
+beautiful.init(home .. "/.config/awesome/themes/sandor/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = "gvim"
+browser = "jumanji"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -85,14 +113,14 @@ end
 -- {{{ Tags
 -- Define a tag table which will hold all screen tags.
 tags = {
-  names  = { "1:web", "2:mail", "3:fm", "4:office", "5", "6", 7, 8, 9 },
-  layout = { layouts[2], layouts[2], layouts[1], layouts[5], layouts[6],
-             layouts[12], layouts[9], layouts[3], layouts[7]
+    names  = { "1:web", "2:term", "3:fm", "4:office", "5" },
+    layout = { layouts[2], layouts[2], layouts[1], layouts[5], layouts[6],
+               layouts[12], layouts[9], layouts[3], layouts[7]
 }}
 tags2 = {
-  names  = { "1:dev", "2:term", "3:im", "4:gimp", "5", "6", 7, 8, 9 },
-  layout = { layouts[2], layouts[2], layouts[1], layouts[5], layouts[6],
-             layouts[12], layouts[9], layouts[3], layouts[7]
+    names  = { "1:dev", "2:term", "3:im", "4:gimp", "5" },
+    layout = { layouts[2], layouts[2], layouts[1], layouts[5], layouts[6],
+               layouts[12], layouts[9], layouts[3], layouts[7]
 }}
 
 for s = 1, screen.count() do
@@ -115,8 +143,13 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
+                                    { "terminal", terminal },
+                                    { "lxrandr", "lxrandr" },
+                                    { "abiword", "abiword" },
+                                    { "noise", "noise-player" },
+                                    { "pcmanfm", "pcmanfm" },
+                                    { "geary", "geary" },
+                                    { "browser", browser }
                                   }
                         })
 
@@ -128,36 +161,71 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibox
---  Network usage widget
--- Initialize widget, use widget({ type = "textbox" }) for awesome < 3.5
-netwidget = wibox.widget.textbox()
+local apw = require("apw")
+
 vicious.cache(vicious.widgets.cpu)
 
 -- Initialize widget
-cpuwidget1 = awful.widget.graph()
--- Graph properties
-cpuwidget1:set_width(75)
-cpuwidget1:set_height(30)
-cpuwidget1:set_border_color("#222222")
-cpuwidget1:set_background_color("#000000")
-cpuwidget1:set_color({ type = "linear", from = { 75,0 }, to = { 75,30 }, stops = { {0, "#FF0000"}, {0.5, "#FFFF00"}, {1, "#00FF00" }}})
+cpuwidget1 = blingbling.line_graph({
+    height = 21,
+    width = 75,
+    show_text = true,
+    label = "cpu: $percent%"
+})
+cpuwidget1:set_height(21)
+cpuwidget1:set_v_margin(0)
+cpuwidget1:set_background_color("#535d6c")
+cpuwidget1:set_graph_background_color("#535d6c")
+cpuwidget1:set_text_background_color("#535d6c")
+
 -- Register widget
-vicious.register(cpuwidget1, vicious.widgets.cpu, "$1", 1)
+vicious.register(cpuwidget1, vicious.widgets.cpu, "$1", 2)
+
 batwidget = awful.widget.progressbar()
 batwidget:set_width(8)
 batwidget:set_height(10)
 batwidget:set_vertical(true)
-batwidget:set_background_color("#494B4F")
-batwidget:set_border_color(nil)
-batwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 10 }, stops = { { 0, "#AECF96" }, { 0.5, "#88A175" }, { 1, "#FF5656" }}})
-vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
-
+batwidget:set_background_color("#272822")
+batwidget:set_border_color("#272822")
+batwidget:set_color({ type = "linear", from = { 0, 22 }, to = { 0, 0 }, stops = { { 0, "#FF0000" }, { 0.3, theme.fg_normal }, { 1, theme.fg_normal }}})
+vicious.register(batwidget, vicious.widgets.bat, " $2", 61, "BAT0")
+-- Initialize widget
+battext = wibox.widget.textbox()
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '<span color="#EE6363">▼${eth0 down_kb}</span> <span color="#7FDF7F">▲${eth0 up_kb}</span>', 3)
-netwidget = wibox.layout.constraint(netwidget, "exact", 75, nil)
+vicious.register(battext, vicious.widgets.bat, "$2% ", 13, 'BAT0')
+
+--  Network usage widget
+-- Initialize widget, use widget({ type = "textbox" }) for awesome < 3.5
+netwidget = wibox.widget.textbox()
+netwidget:set_align("center")
+--netwidget = wibox.layout.constraint(netwidget, "exact", 75, nil)
+-- Register widget
+vicious.register(netwidget, vicious.widgets.net, '${wlp2s0 up_kb} ${wlp2s0 down_kb}', 3)
+
+-- Initialize widget
+memwidget = wibox.widget.textbox()
+-- Register widget
+vicious.register(memwidget, vicious.widgets.mem, "$1% ($2M/$3M) ", 13)
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+mytextclock = awful.widget.textclock(" %a, %d. %b, <b>%H:%M</b> ")
+
+calendar = blingbling.calendar({widget = mytextclock})
+
+apwwidget = apw.widget
+
+-- Separators
+arr_ldl = wibox.widget.imagebox()
+arr_ldl:set_image(beautiful.titlebar_ldl)
+
+arr_lld = wibox.widget.imagebox()
+arr_lld:set_image(beautiful.titlebar_lld)
+
+arr_rdl = wibox.widget.imagebox()
+arr_rdl:set_image(beautiful.titlebar_rdl)
+
+arr_rld = wibox.widget.imagebox()
+arr_rld:set_image(beautiful.titlebar_rld)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -231,18 +299,35 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
+
     left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
+    left_layout:add(arr_rld)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(arr_ldl)
+    if s == 1 then
+        systray = wibox.widget.systray()
+        systray = wibox.widget.background(systray, "#535d6c")
+        right_layout:add(systray)
+    end
+
+    right_layout:add(wibox.widget.background(apwwidget), "#535d6c")
+    right_layout:add(arr_rld)
+    right_layout:add(memwidget)
+    right_layout:add(arr_rdl)
     right_layout:add(cpuwidget1)
+    right_layout:add(arr_rld)
     right_layout:add(batwidget)
-    right_layout:add(netwidget)
-    right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+    right_layout:add(battext)
+    right_layout:add(arr_rdl)
+    right_layout:add(wibox.widget.background(netwidget, "#535d6c"))
+    right_layout:add(arr_rld)
+    right_layout:add(calendar)
+    right_layout:add(arr_rdl)
+    right_layout:add(wibox.widget.background(mylayoutbox[s], "#535d6c"))
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -264,6 +349,13 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    awful.key({                   }, "XF86MonBrightnessDown", function()
+	awful.util.spawn("xbacklight -dec 15") end),
+    awful.key({                   }, "XF86MonBrightnessUp", function()
+	awful.util.spawn("xbacklight -inc 15") end),
+    awful.key({                   }, "XF86AudioRaiseVolume", apwwidget.Up),
+    awful.key({                   }, "XF86AudioLowerVolume", apwwidget.Down),
+    awful.key({                   }, "XF86AudioMute",        apwwidget.ToggleMute),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),

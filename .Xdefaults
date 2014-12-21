@@ -1,5 +1,12 @@
 ! Cursor theme
 xcursor.theme:            Vanilla-DMZ
+
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  chromium
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search
  
 ! URxvt config
 !URxvt*termName:           rxvt-16color
@@ -22,9 +29,13 @@ URxvt.tabbed.tab-fg:      2
 URxvt.tabbed.tab-bg:      0
 URxvt.tabbed.new-button:  no
 URxvt.tabbed.title:       no
- 
+
+!URxvt.transparent: true
+!URxvt.shading: 10
+URxvt.depth: 32
 ! Tango color palette
-URxvt*background:         #192010
+!URxvt*background:         [90]#272822
+URxvt*background:         [90]#000000
 URxvt*foreground:         #eeeeec
 !URxvt*cursorColor:        #8ae234
 ! foreground color for underline
