@@ -1,0 +1,18 @@
+[submodule ".zsh/zsh-syntax-highlighting"]
+	path = .zsh/zsh-syntax-highlighting
+	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule ".config/awesome/blingbling"]
+	path = .config/awesome/blingbling
+	url = git://github.com/cedlemo/blingbling.git
+[submodule ".config/awesome/apw"]
+	path = .config/awesome/apw
+	url = git@github.com:czettnersandor/apw.git
+[submodule ".vim/bundle/editorconfig-vim"]
+	path = .vim/bundle/editorconfig-vim
+	url = git@github.com:editorconfig/editorconfig-vim.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule ".vim/bundle/vim-gitgutter"]
+	path = .vim/bundle/vim-gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git
