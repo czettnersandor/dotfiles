@@ -53,6 +53,7 @@ bindkey "\e[F" end-of-line
 #PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%1~ %{$reset_color%}%# "
 #PROMPT="%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} "
 PROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%}\n$ '
+RPROMPT="%(?..%{$fg[red]%}%? ↵%{$fg[default]%})"
 
 #PROMPT="%c$(prompt_git_info) %% "
 export EDITOR="vim"
@@ -65,7 +66,6 @@ alias node='nodejs'
 
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-PATH="/opt/play20:$PATH"
 
 # TMUX
 if which tmux 2>&1 >/dev/null; then
