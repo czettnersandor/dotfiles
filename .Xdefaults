@@ -12,6 +12,8 @@ URxvt.keysym.M-s:           perl:keyboard-select:search
 !URxvt*termName:           rxvt-16color
  
 URxvt.scrollBar:          off
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
 URxvt.font:               xft:Bitstream Vera Sans Mono-9
 !URxvt.internalBorder:     0
 !URxvt.font:                    -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
