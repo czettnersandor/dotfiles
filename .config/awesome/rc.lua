@@ -60,9 +60,9 @@ local function bat_notification()
     end
 end
 
---battimer = timer({timeout = 60})
---battimer:connect_signal("timeout", bat_notification)
---battimer:start()
+battimer = timer({timeout = 60})
+battimer:connect_signal("timeout", bat_notification)
+battimer:start()
 
 -- end here for battery warning
 
@@ -200,7 +200,7 @@ netwidget = wibox.widget.textbox()
 netwidget:set_align("center")
 --netwidget = wibox.layout.constraint(netwidget, "exact", 75, nil)
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '${eth0 up_kb} ${eth0 down_kb}', 3)
+vicious.register(netwidget, vicious.widgets.net, '${wlp2s0 up_kb} ${wlp2s0 down_kb}', 3)
 
 -- Initialize widget
 memwidget = wibox.widget.textbox()
