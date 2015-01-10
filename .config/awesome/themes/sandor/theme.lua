@@ -104,7 +104,7 @@ theme.titlebar_lld = theme.dir .. "/titlebar/lld.png"
 theme.titlebar_rdl = theme.dir .. "/titlebar/rdl.png"
 theme.titlebar_rld = theme.dir .. "/titlebar/rld.png"
 
-theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+theme.awesome_icon = theme.dir .. "/titlebar/nyilas.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
