@@ -138,8 +138,10 @@ end
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
+   { "restart wm", awesome.restart },
+   { "quit wm", awesome.quit },
+   { "reboot", "systemctl restart" },
+   { "poweroff", "systemctp poweroff" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -148,7 +150,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "abiword", "abiword" },
                                     { "noise", "noise-player" },
                                     { "pcmanfm", "pcmanfm" },
-                                    { "geary", "geary" },
+                                    { "geary", "claws-mail" },
                                     { "browser", browser }
                                   }
                         })
