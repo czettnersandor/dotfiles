@@ -14,10 +14,10 @@ URxvt.keysym.M-s:           perl:keyboard-select:search
 URxvt.scrollBar:          off
 URxvt.secondaryScreen: 1
 URxvt.secondaryScroll: 0
-URxvt.font:               xft:Bitstream Vera Sans Mono-9
+!URxvt.font:               xft:Bitstream Vera Sans Mono-9
 !URxvt.internalBorder:     0
-!URxvt.font:                    -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-!URxvt.boldFont:                -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
+URxvt.font:                    -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+URxvt.boldFont:                -*-terminus-bold-*-*-*-12-*-*-*-*-*-*-*
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink: true
