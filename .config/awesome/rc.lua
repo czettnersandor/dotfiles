@@ -141,7 +141,7 @@ myawesomemenu = {
    { "restart wm", awesome.restart },
    { "quit wm", awesome.quit },
    { "reboot", "systemctl restart" },
-   { "poweroff", "systemctp poweroff" }
+   { "poweroff", "systemctl poweroff" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
