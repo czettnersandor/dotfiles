@@ -168,17 +168,12 @@ local apw = require("apw")
 vicious.cache(vicious.widgets.cpu)
 
 -- Initialize widget
-cpuwidget1 = blingbling.line_graph({
-    height = 21,
-    width = 75,
-    show_text = true,
-    label = "cpu: $percent%"
-})
-cpuwidget1:set_height(21)
-cpuwidget1:set_v_margin(0)
+cpuwidget1 = awful.widget.graph()
+-- Graph properties
+cpuwidget1:set_width(50)
 cpuwidget1:set_background_color("#535d6c")
-cpuwidget1:set_graph_background_color("#535d6c")
-cpuwidget1:set_text_background_color("#535d6c")
+cpuwidget1:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"}, 
+                    {1, "#AECF96" }}})
 
 -- Register widget
 vicious.register(cpuwidget1, vicious.widgets.cpu, "$1", 2)
