@@ -104,6 +104,12 @@ theme.titlebar_lld = theme.dir .. "/titlebar/lld.png"
 theme.titlebar_rdl = theme.dir .. "/titlebar/rdl.png"
 theme.titlebar_rld = theme.dir .. "/titlebar/rld.png"
 
+theme.titlebar_icon_bat = theme.dir .. "/titlebar/icon-bat.png"
+theme.titlebar_icon_cal = theme.dir .. "/titlebar/icon-cal.png"
+theme.titlebar_icon_chip = theme.dir .. "/titlebar/icon-chip.png"
+theme.titlebar_icon_net = theme.dir .. "/titlebar/icon-net.png"
+theme.titlebar_icon_speaker = theme.dir .. "/titlebar/icon-speaker.png"
+
 theme.awesome_icon = theme.dir .. "/titlebar/nyilas.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
