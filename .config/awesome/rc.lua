@@ -43,26 +43,26 @@ local function trim(s)
     return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
 end
 
-local function bat_notification()
-    local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
-    local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
-    local bat_capacity = tonumber(f_capacity:read("*all"))
-    local bat_status = trim(f_status:read("*all"))
+--local function bat_notification()
+--    local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
+--    local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
+--    local bat_capacity = tonumber(f_capacity:read("*all"))
+--    local bat_status = trim(f_status:read("*all"))
+--
+--    if (bat_capacity <= 10 and bat_status == "Discharging") then
+--        naughty.notify({ title      = "Battery Warning"
+--        , text       = "Battery low! " .. bat_capacity .."%" .. " left!"
+--        , fg="#ffffff"
+--        , bg="#C91C1C"
+--        , timeout    = 15
+--         , position   = "top_right"
+--        })
+--    end
+--end
 
-    if (bat_capacity <= 10 and bat_status == "Discharging") then
-        naughty.notify({ title      = "Battery Warning"
-        , text       = "Battery low! " .. bat_capacity .."%" .. " left!"
-        , fg="#ffffff"
-        , bg="#C91C1C"
-        , timeout    = 15
-         , position   = "top_right"
-        })
-    end
-end
-
-battimer = timer({timeout = 60})
-battimer:connect_signal("timeout", bat_notification)
-battimer:start()
+--battimer = timer({timeout = 60})
+--battimer:connect_signal("timeout", bat_notification)
+--battimer:start()
 
 -- end here for battery warning
 
@@ -197,7 +197,7 @@ netwidget = wibox.widget.textbox()
 netwidget:set_align("center")
 --netwidget = wibox.layout.constraint(netwidget, "exact", 75, nil)
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '${wlp2s0 up_kb} ${wlp2s0 down_kb}', 3)
+vicious.register(netwidget, vicious.widgets.net, '${eth0 up_kb} ${eth0 down_kb}', 3)
 
 -- Initialize widget
 memwidget = wibox.widget.textbox()
@@ -318,7 +318,7 @@ for s = 1, screen.count() do
     right_layout:add(arr_rdl)
     right_layout:add(cpuwidget1)
     right_layout:add(arr_rld)
-    right_layout:add(batwidget)
+    --right_layout:add(batwidget)
     right_layout:add(battext)
     right_layout:add(arr_rdl)
     right_layout:add(wibox.widget.background(netwidget, "#535d6c"))

@@ -16,6 +16,6 @@ if [ -n "$__CURRENT_GIT_BRANCH" ]; then
         s+="⚡"
     fi
     s+=")"
- 
+
     printf " %s%s" "%{${fg[yellow]}%}" $s
 fi
