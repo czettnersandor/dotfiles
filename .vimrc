@@ -18,3 +18,4 @@ set showmatch
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
+set guifont=terminus\ 14px
