@@ -60,9 +60,9 @@ local function bat_notification()
     end
 end
 
-battimer = timer({timeout = 60})
-battimer:connect_signal("timeout", bat_notification)
-battimer:start()
+--battimer = timer({timeout = 60})
+--battimer:connect_signal("timeout", bat_notification)
+--battimer:start()
 
 -- end here for battery warning
 
@@ -125,7 +125,7 @@ tags2 = {
 
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    if s == 2 then 
+    if s == 2 then
         tags[s] = awful.tag(tags2.names, s, tags2.layout)
     else
         tags[s] = awful.tag(tags.names, s, tags.layout)
@@ -172,7 +172,7 @@ cpuwidget1 = awful.widget.graph()
 -- Graph properties
 cpuwidget1:set_width(50)
 cpuwidget1:set_background_color("#535d6c")
-cpuwidget1:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"}, 
+cpuwidget1:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"},
                     {1, "#AECF96" }}})
 
 -- Register widget
@@ -197,7 +197,7 @@ netwidget = wibox.widget.textbox()
 netwidget:set_align("center")
 --netwidget = wibox.layout.constraint(netwidget, "exact", 75, nil)
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '${wlp2s0 up_kb} ${wlp2s0 down_kb}', 3)
+vicious.register(netwidget, vicious.widgets.net, '${eth0 up_kb} ${eth0 down_kb}', 3)
 
 -- Initialize widget
 memwidget = wibox.widget.textbox()
@@ -335,9 +335,9 @@ for s = 1, screen.count() do
     right_layout:add(arr_rdl)
     right_layout:add(cpuwidget1)
     right_layout:add(arr_rld)
-    right_layout:add(icon_bat)
-    right_layout:add(batwidget)
-    right_layout:add(battext)
+    --right_layout:add(icon_bat)
+    --right_layout:add(batwidget)
+    --right_layout:add(battext)
     right_layout:add(arr_rdl)
     right_layout:add(wibox.widget.background(icon_net, "535d6c"))
     right_layout:add(wibox.widget.background(netwidget, "#535d6c"))
