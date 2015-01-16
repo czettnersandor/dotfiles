@@ -1,0 +1,3 @@
+searchengine ddg https://duckduckgo.com/?q=%s
+set homepage https://duckduckgo.com/
+set single_instance true
