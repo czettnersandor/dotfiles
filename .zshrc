@@ -67,12 +67,13 @@ alias node='nodejs'
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ssh-add ~/.ssh/id_rsa &> /dev/null
+
 # TMUX
 if which tmux 2>&1 >/dev/null; then
    #if not inside a tmux session, and if no session is started, start a new session
    test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-ssh-add ~/.ssh/id_rsa &> /dev/null

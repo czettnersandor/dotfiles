@@ -1,3 +1,7 @@
 searchengine ddg https://duckduckgo.com/?q=%s
 set homepage https://duckduckgo.com/
 set single_instance true
+
+# Mitro.co
+script ~/.config/jumanji/scripts/mitroco.js
+
