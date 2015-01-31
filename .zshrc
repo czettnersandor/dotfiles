@@ -1,3 +1,9 @@
+# TMUX
+if which tmux 2>&1 >/dev/null; then
+   #if not inside a tmux session, and if no session is started, start a new session
+   test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -50,12 +56,9 @@ bindkey "\eOF" end-of-line
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 
-#PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%1~ %{$reset_color%}%# "
-#PROMPT="%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} "
 PROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%}\n$ '
 RPROMPT="%(?..%{$fg[red]%}%? ↵%{$fg[default]%})"
 
-#PROMPT="%c$(prompt_git_info) %% "
 export EDITOR="vim"
 
 # command alias
@@ -64,16 +67,11 @@ alias ll='ls -lh'
 alias grep='grep --color=auto'
 alias node='nodejs'
 
-PATH="$HOME/.rbenv/bin:$PATH"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
 eval "$(rbenv init -)"
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ssh-add ~/.ssh/id_rsa &> /dev/null
-
-# TMUX
-if which tmux 2>&1 >/dev/null; then
-   #if not inside a tmux session, and if no session is started, start a new session
-   test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
 
