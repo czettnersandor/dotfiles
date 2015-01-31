@@ -6,3 +6,5 @@ compton -b --opengl --vsync opengl-swc --paint-on-overlay &
 xss-lock -- xscreensaver-command -lock &
 unclutter &
 syndaemon -t -k -i 2 &
+/usr/bin/start-pulseaudio-x11 &
+
