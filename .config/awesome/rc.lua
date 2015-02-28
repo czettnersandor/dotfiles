@@ -191,6 +191,25 @@ battext = wibox.widget.textbox()
 -- Register widget
 vicious.register(battext, vicious.widgets.bat, "$2% ", 13, 'BAT0')
 
+-- Keyboard map indicator and changer
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+kbdcfg.layout = { { "gb", "" , "[gb]" }, { "hu", "" , "[hu]" } } 
+kbdcfg.current = 1  -- us is our default layout
+kbdcfg.widget = wibox.widget.textbox()
+kbdcfg.widget:set_text(" " .. kbdcfg.layout[kbdcfg.current][3] .. " ")
+kbdcfg.switch = function ()
+  kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+  local t = kbdcfg.layout[kbdcfg.current]
+  kbdcfg.widget:set_text(" " .. t[3] .. " ")
+  os.execute( kbdcfg.cmd .. " " .. t[1] .. " " .. t[2] )
+end
+
+ -- Mouse bindings
+kbdcfg.widget:buttons(
+ awful.util.table.join(awful.button({ }, 1, function () kbdcfg.switch() end))
+)
+
 --  Network usage widget
 -- Initialize widget, use widget({ type = "textbox" }) for awesome < 3.5
 netwidget = wibox.widget.textbox()
@@ -329,6 +348,7 @@ for s = 1, screen.count() do
 
     right_layout:add(wibox.widget.background(icon_speaker, "#535d6c"))
     right_layout:add(wibox.widget.background(apwwidget, "#535d6c"))
+    right_layout:add(wibox.widget.background(kbdcfg.widget, "#535d6c"))
     right_layout:add(arr_rld)
     right_layout:add(icon_chip)
     right_layout:add(memwidget)
