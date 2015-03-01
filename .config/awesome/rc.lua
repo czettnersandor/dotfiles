@@ -391,6 +391,8 @@ globalkeys = awful.util.table.join(
 	awful.util.spawn("xbacklight -dec 15") end),
     awful.key({                   }, "XF86MonBrightnessUp", function()
 	awful.util.spawn("xbacklight -inc 15") end),
+    awful.key({                   }, "XF86Display", function()
+  awful.util.spawn("xscreensaver-command -lock") end),
     awful.key({                   }, "XF86AudioRaiseVolume", apwwidget.Up),
     awful.key({                   }, "XF86AudioLowerVolume", apwwidget.Down),
     awful.key({                   }, "XF86AudioMute",        apwwidget.ToggleMute),
