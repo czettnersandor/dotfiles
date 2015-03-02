@@ -64,6 +64,7 @@ export EDITOR="vim"
 # command alias
 alias ls='ls -F --color=auto' 
 alias ll='ls -lh'
+alias drupal='drupal --ansi'
 alias grep='grep --color=auto'
 alias node='nodejs'
 
