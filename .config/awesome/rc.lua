@@ -194,8 +194,8 @@ vicious.register(battext, vicious.widgets.bat, "$2% ", 13, 'BAT0')
 -- Keyboard map indicator and changer
 kbdcfg = {}
 kbdcfg.cmd = "setxkbmap"
-kbdcfg.layout = { { "gb", "" , "[gb]" }, { "hu", "" , "[hu]" } } 
-kbdcfg.current = 1  -- us is our default layout
+kbdcfg.layout = { { "gb", "" , "[gb]" }, { "us", "" ,"[us]" }, { "hu", "" , "[hu]" } } 
+kbdcfg.current = 1  -- gb is our default layout
 kbdcfg.widget = wibox.widget.textbox()
 kbdcfg.widget:set_text(" " .. kbdcfg.layout[kbdcfg.current][3] .. " ")
 kbdcfg.switch = function ()
