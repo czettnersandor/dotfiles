@@ -2,9 +2,10 @@ connman-ui-gtk &
 blueman-applet &
 xbacklight -inc 100 &
 compton -b --opengl --vsync opengl-swc --paint-on-overlay &
-( ( sleep 10 && /usr/bin/xscreensaver -no-splash -display :0.0 ) & )
-xss-lock -- xscreensaver-command -lock &
+xautolock -time 10 -locker "i3lock -i '.config/i3/archlinux.jpg'" -lockaftersleep &
 unclutter &
 syndaemon -t -k -i 2 &
 /usr/bin/start-pulseaudio-x11 &
+xrandr --output LVDS1 --primary
+nitrogen --restore
 
