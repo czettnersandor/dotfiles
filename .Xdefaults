@@ -11,8 +11,7 @@ URxvt.keysym.M-s:           perl:keyboard-select:search
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-URxvt.font:               -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-URxvt.boldFont:           -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
+URxvt.font: xft:Mensch:size=9
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
