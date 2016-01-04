@@ -6,7 +6,7 @@ theme = {}
 
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/sandor"
 
-theme.font          = "terminus 14px"
+theme.font          = "Mensch 14px"
 
 theme.bg_normal     = "#272822"
 theme.bg_focus      = theme.bg_normal
