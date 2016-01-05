@@ -2,6 +2,7 @@ call pathogen#infect()
 filetype off
 syntax on
 filetype plugin indent on
+set nobackup
 
 let g:molokai_original = 1
 set t_Co=256
