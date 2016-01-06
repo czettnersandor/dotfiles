@@ -216,7 +216,7 @@ netwidget = wibox.widget.textbox()
 netwidget:set_align("center")
 --netwidget = wibox.layout.constraint(netwidget, "exact", 75, nil)
 -- Register widget
-vicious.register(netwidget, vicious.widgets.net, '${enp0s7 up_kb} ${enp0s7 down_kb}', 3)
+vicious.register(netwidget, vicious.widgets.net, '${enp5s0 up_kb} ${enp5s0 down_kb}', 3)
 
 -- Initialize widget
 memwidget = wibox.widget.textbox()
