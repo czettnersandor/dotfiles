@@ -32,9 +32,8 @@ chpwd_functions+='chpwd_update_git_vars'
 setopt PROMPT_SUBST
 
 # End of lines added by compinstall
-
-#bindkey "\e[1~" beginning-of-line # Home
-#bindkey "\e[4~" end-of-line # End
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 #bindkey "\e[5~" beginning-of-history # PageUp
 #bindkey "\e[6~" end-of-history # PageDown
 #bindkey "\e[2~" quoted-insert # Ins
