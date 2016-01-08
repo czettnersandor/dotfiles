@@ -34,18 +34,12 @@ setopt PROMPT_SUBST
 # End of lines added by compinstall
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
-#bindkey "\e[5~" beginning-of-history # PageUp
-#bindkey "\e[6~" end-of-history # PageDown
-#bindkey "\e[2~" quoted-insert # Ins
-#bindkey "\e[3~" delete-char # Del
-#bindkey "\e[5C" forward-word
-#bindkey "\eOc" emacs-forward-word
-#bindkey "\e[5D" backward-word
-#bindkey "\eOd" emacs-backward-word
-#bindkey "\e\e[C" forward-word
-#bindkey "\e\e[D" backward-word
-#bindkey "\e[Z" reverse-menu-complete # Shift+Tab
-
+bindkey "${terminfo[kpp]}" beginning-of-history # PageUp
+bindkey "${terminfo[knp]}" end-of-history # PageDown
+bindkey "${terminfo[kich1]}" quoted-insert # Ins
+bindkey "${terminfo[kdch1]}" delete-char # Del
+bindkey "^[[C" forward-word # [Ctrl-RightArrow] - move forward one word
+bindkey "^[[D" backward-word # [Ctrl-LeftArrow] - move backward one word
 # for rxvt
 bindkey "\e[7~" beginning-of-line # Home
 bindkey "\e[8~" end-of-line # End
