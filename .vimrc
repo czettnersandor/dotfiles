@@ -16,7 +16,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 set number
 set showmatch
-set guioptions-=T
-set guioptions-=r
-set guioptions-=L
-set guifont=terminus\ 14px
