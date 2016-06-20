@@ -15,7 +15,7 @@ URxvt.keysym.KP_End: \033[4~
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-URxvt.font: xft:Mensch:size=9
+URxvt.font: xft:Mensch:size=9:hinting=true
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
@@ -67,3 +67,10 @@ URxvt*color15:            #eeeeec
 ! xscreensaver
 xscreensaver.fade:        false
 xscreensaver.unfade:      false
+
+! Font hinting
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.rgba:       rgb
+Xft.hintstyle:  hintfull
