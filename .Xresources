@@ -15,7 +15,7 @@ URxvt.keysym.KP_End: \033[4~
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-URxvt.font: xft:Mensch:size=9:hinting=true
+URxvt.font: xft:Monospace:size=9:hinting=true
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
@@ -33,36 +33,77 @@ URxvt.visualBell:         true
 !URxvt.shading: 10
 URxvt.depth: 32
 ! Tango color palette
-URxvt*background:         [90]#000000
-URxvt*foreground:         #eeeeec
+URxvt*background:         [90]#0e2325
+URxvt*foreground:         #d0f0e3
 ! foreground color for underline
 URxvt*colorUL:            #8ae234
 ! line color for underline
 URxvt*underlineColor:     #92659a
-! black dark/light
-URxvt*color0:             #2e3436
-URxvt*color8:             #6e706b
-! red dark/light
-URxvt*color1:             #cc0000
-URxvt*color9:             #ef2929
-! green dark/light
-URxvt*color2:             #4e9a06
-URxvt*color10:            #8ae234
-! yellow dark/light
-URxvt*color3:             #edd400
-URxvt*color11:            #fce94f
-! blue dark/light
-URxvt*color4:             #3465a4
-URxvt*color12:            #729fcf
-! magenta dark/light
-URxvt*color5:             #92659a
-URxvt*color13:            #c19fbe
-! cyan dark/light
-URxvt*color6:             #07c7ca
-URxvt*color14:            #63e9e9
-! white dark/light
-URxvt*color7:             #d3d7cf
-URxvt*color15:            #eeeeec
+! --- ~/.Xresources ------------------------------------------------------------
+! ------------------------------------------------------------------------------
+! --- generated with 4bit Terminal Color Scheme Designer -----------------------
+! ------------------------------------------------------------------------------
+! --- http://ciembor.github.com/4bit -------------------------------------------
+! ------------------------------------------------------------------------------
+
+! --- special colors ---
+
+*background: #0e2325
+*foreground: #d0f0e3
+
+! --- standard colors ---
+
+! black
+*color0: #223c37
+
+! bright_black
+*color8: #37514c
+
+! red
+*color1: #a94c4c
+
+! bright_red
+*color9: #d29999
+
+! green
+*color2: #4ca94c
+
+! bright_green
+*color10: #99d299
+
+! yellow
+*color3: #a9a94c
+
+! bright_yellow
+*color11: #d2d299
+
+! blue
+*color4: #4c4ca9
+
+! bright_blue
+*color12: #9999d2
+
+! magenta
+*color5: #a94ca9
+
+! bright_magenta
+*color13: #d299d2
+
+! cyan
+*color6: #4ca9a9
+
+! bright_cyan
+*color14: #99d2d2
+
+! white
+*color7: #7f9994
+
+! bright_white
+*color15: #94aea9
+
+! ------------------------------------------------------------------------------
+! --- end of terminal colors section -------------------------------------------
+! ------------------------------------------------------------------------------
 
 ! xscreensaver
 xscreensaver.fade:        false
