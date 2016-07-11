@@ -141,7 +141,7 @@ mode "(E)xit, (R)eboot, (P)oweroff, (S)uspend, (H)ibernate?" {
         bindsym e exit
         bindsym r exec systemctl reboot
         bindsym p exec systemctl poweroff
-        bindsym s exec systemctl suspend
+        bindsym s mode "default" exec systemctl suspend
         bindsym h exec systemctl hibernate
 
         # back to normal: Enter or Escape
