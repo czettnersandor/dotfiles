@@ -1,5 +1,12 @@
 ! Cursor theme
 xcursor.theme:              Vanilla-DMZ
+Xft.dpi: 192
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher:  chromium
@@ -15,7 +22,9 @@ URxvt.keysym.KP_End: \033[4~
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-URxvt.font: xft:Mensch:size=9
+! HiDPI
+URxvt.font: xft:Roboto Mono:pixelsize=28
+URxvt.boldFont: xft:Roboto Mono:pixelsize=28:style=Bold
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
