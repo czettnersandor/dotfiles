@@ -15,7 +15,7 @@ URxvt.keysym.KP_End: \033[4~
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-URxvt.font: xft:Monospace:size=9:hinting=true
+URxvt.font: xft:Droid Sans Mono:autohint=true:antialias=true:size=10
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
@@ -33,77 +33,43 @@ URxvt.visualBell:         true
 !URxvt.shading: 10
 URxvt.depth: 32
 ! Tango color palette
-URxvt*background:         [90]#0e2325
-URxvt*foreground:         #d0f0e3
-! foreground color for underline
-URxvt*colorUL:            #8ae234
-! line color for underline
-URxvt*underlineColor:     #92659a
-! --- ~/.Xresources ------------------------------------------------------------
-! ------------------------------------------------------------------------------
-! --- generated with 4bit Terminal Color Scheme Designer -----------------------
-! ------------------------------------------------------------------------------
-! --- http://ciembor.github.com/4bit -------------------------------------------
-! ------------------------------------------------------------------------------
+URxvt*background:         [90]#002b36
+URxvt*foreground:         #657b83
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+!! black dark/light
+*color0: #073642
+*color8: #002b36
 
-! --- special colors ---
+!! red dark/light
+*color1: #dc322f
+*color9: #cb4b16
 
-*background: #0e2325
-*foreground: #d0f0e3
+!! green dark/light
+*color2: #859900
+*color10: #586e75
 
-! --- standard colors ---
+!! yellow dark/light
+*color3: #b58900
+*color11: #657b83
 
-! black
-*color0: #223c37
+!! blue dark/light
+*color4: #268bd2
+*color12: #839496
 
-! bright_black
-*color8: #37514c
+!! magenta dark/light
+*color5: #d33682
+*color13: #6c71c4
 
-! red
-*color1: #a94c4c
+!! cyan dark/light
+*color6: #2aa198
+*color14: #93a1a1
 
-! bright_red
-*color9: #d29999
+!! white dark/light
+*color7: #eee8d5
+*color15: #fdf6e3
 
-! green
-*color2: #4ca94c
-
-! bright_green
-*color10: #99d299
-
-! yellow
-*color3: #a9a94c
-
-! bright_yellow
-*color11: #d2d299
-
-! blue
-*color4: #4c4ca9
-
-! bright_blue
-*color12: #9999d2
-
-! magenta
-*color5: #a94ca9
-
-! bright_magenta
-*color13: #d299d2
-
-! cyan
-*color6: #4ca9a9
-
-! bright_cyan
-*color14: #99d2d2
-
-! white
-*color7: #7f9994
-
-! bright_white
-*color15: #94aea9
-
-! ------------------------------------------------------------------------------
-! --- end of terminal colors section -------------------------------------------
-! ------------------------------------------------------------------------------
 
 ! xscreensaver
 xscreensaver.fade:        false
