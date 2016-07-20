@@ -65,6 +65,7 @@ alias node='nodejs'
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/node_modules/.bin"
+export MC_SKIN=$HOME/.mc/lib/mc-solarized/solarized.ini
 eval "$(rbenv init -)"
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
