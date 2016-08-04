@@ -72,3 +72,4 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ssh-add ~/.ssh/id_rsa &> /dev/null
 
+eval `dircolors $HOME/.config/dircolors`
