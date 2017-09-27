@@ -8,5 +8,26 @@
 [alias]
 	co = checkout
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	praise = blame
 [http]
 	postBuffer = 524288000
+
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[commit]
+	verbose = true

@@ -61,6 +61,12 @@ alias ll='ls -lh'
 alias drupal='drupal --ansi'
 alias grep='grep --color=auto'
 alias node='nodejs'
+alias c='docker-compose'
+alias cup='docker-compose up'
+alias cstop='docker-compose stop'
+alias cps='docker-compose ps'
+alias cbash='docker-compose exec apache bash'
+alias cmagento='docker-compose exec --user application apache /usr/bin/php -dmemory_limit=2G /web/bin/magento' 
 
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"

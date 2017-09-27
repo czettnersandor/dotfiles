@@ -1,5 +1,6 @@
 ! Cursor theme
 xcursor.theme:              Vanilla-DMZ
+xcursor*size: 48
 
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher:  chromium
@@ -15,7 +16,7 @@ URxvt.keysym.KP_End: \033[4~
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-URxvt.font: xft:Droid Sans Mono:autohint=true:antialias=true:size=10
+URxvt.font: xft:Droid Sans Mono:autohint=true:antialias=true:size=5
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
@@ -32,43 +33,60 @@ URxvt.visualBell:         true
 !URxvt.transparent: true
 !URxvt.shading: 10
 URxvt.depth: 32
-! Tango color palette
-URxvt*background:         [90]#002b36
-URxvt*foreground:         #657b83
-*cursorColor: #93a1a1
-*pointerColorBackground: #586e75
-*pointerColorForeground: #93a1a1
-!! black dark/light
-*color0: #073642
-*color8: #002b36
+! --- special colors ---
 
-!! red dark/light
-*color1: #dc322f
-*color9: #cb4b16
+*background: #0d1926
+*foreground: #d9e6f2
 
-!! green dark/light
-*color2: #859900
-*color10: #586e75
+! --- standard colors ---
 
-!! yellow dark/light
-*color3: #b58900
-*color11: #657b83
+! black
+*color0: #0e0e0e
 
-!! blue dark/light
-*color4: #268bd2
-*color12: #839496
+! bright_black
+*color8: #272727
 
-!! magenta dark/light
-*color5: #d33682
-*color13: #6c71c4
+! red
+*color1: #a62f31
 
-!! cyan dark/light
-*color6: #2aa198
-*color14: #93a1a1
+! bright_red
+*color9: #db8183
 
-!! white dark/light
-*color7: #eee8d5
-*color15: #fdf6e3
+! green
+*color2: #31a62f
+
+! bright_green
+*color10: #83db81
+
+! yellow
+*color3: #a6a42f
+
+! bright_yellow
+*color11: #dbda81
+
+! blue
+*color4: #2f31a6
+
+! bright_blue
+*color12: #8183db
+
+! magenta
+*color5: #a42fa6
+
+! bright_magenta
+*color13: #da81db
+
+! cyan
+*color6: #2fa6a4
+
+! bright_cyan
+*color14: #81dbda
+
+! white
+*color7: #d9d9d9
+
+! bright_white
+*color15: #ffffff
 
 
 ! xscreensaver
@@ -76,7 +94,9 @@ xscreensaver.fade:        false
 xscreensaver.unfade:      false
 
 ! Font hinting
-Xft.dpi:        96
+Xft.dpi:        192
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
 Xft.antialias:  true
 Xft.hinting:    true
 Xft.rgba:       rgb
