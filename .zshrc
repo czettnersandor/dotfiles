@@ -38,8 +38,9 @@ bindkey "${terminfo[kpp]}" beginning-of-history # PageUp
 bindkey "${terminfo[knp]}" end-of-history # PageDown
 bindkey "${terminfo[kich1]}" quoted-insert # Ins
 bindkey "${terminfo[kdch1]}" delete-char # Del
-bindkey "^[[C" forward-word # [Ctrl-RightArrow] - move forward one word
-bindkey "^[[D" backward-word # [Ctrl-LeftArrow] - move backward one word
+#bindkey "^[[C" forward-word # [Ctrl-RightArrow] - move forward one word
+#bindkey "^[[D" backward-word # [Ctrl-LeftArrow] - move backward one word
+
 # for rxvt
 bindkey "\e[7~" beginning-of-line # Home
 bindkey "\e[8~" end-of-line # End
@@ -61,6 +62,8 @@ alias ll='ls -lh'
 alias drupal='drupal --ansi'
 alias grep='grep --color=auto'
 alias node='nodejs'
+alias cmagento='docker-compose exec --user application apache /usr/bin/php -dmemory_limit=2G /web/bin/magento'
+alias cup='docker-compose up'
 
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"

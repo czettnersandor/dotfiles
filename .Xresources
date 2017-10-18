@@ -1,3 +1,11 @@
+Xft.dpi: 192
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
 ! Cursor theme
 xcursor.theme:              Vanilla-DMZ
 
@@ -70,6 +78,7 @@ rofi.color-window: #262626, #262626, #262626
 rofi.color-normal: #262626, #f3f4f5, #202020, #4fafff, #000000
 rofi.color-active: #002b37, #008ed4, #003643, #008ed4, #66c6ff
 rofi.color-urgent: #002b37, #da4281, #003643, #008ed4, #890661
+rofi.font:         monospace 24
 
 ! xscreensaver
 xscreensaver.fade:        false
