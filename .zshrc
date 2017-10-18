@@ -64,6 +64,8 @@ alias grep='grep --color=auto'
 alias node='nodejs'
 alias cmagento='docker-compose exec --user application apache /usr/bin/php -dmemory_limit=2G /web/bin/magento'
 alias cup='docker-compose up'
+alias cbash='docker-compose exec --user application apache bash'
+alias csudo='docker-compose exec apache bash'
 
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
