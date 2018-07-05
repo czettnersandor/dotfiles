@@ -1,7 +1,7 @@
 [core]
 	excludesfile = ~/.config/git/ignore
 [user]
-	email = sandor@healthywebsites.co.uk
+	email = sandor@cohesiondigital.co.uk
 	name = Sándor Czettner
 [push]
 	default = simple
