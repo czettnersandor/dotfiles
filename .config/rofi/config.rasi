@@ -1,0 +1,82 @@
+
+/*
+ * ROFI color theme
+ */
+
+* {
+	base00: #002b36;
+	base01: #073642;
+	base02: #586e75;
+	base03: #657b83;
+	base04: #B2CCD6;
+	base05: #839496;
+	base06: #93a1a1;
+	base07: #eee8d5;
+	base08: #fdf6e3;
+	base09: #b58900;
+	base0A: #cb4b16;
+	base0B: #dc322f;
+	base0C: #d33682;
+	base0D: #6c71c4;
+	base0E: #268bd2;
+	base0F: #2aa198;
+
+	spacing: 10;
+	background-color: transparent;
+
+	font: "Ubuntu Mono 24";
+}
+
+window {
+	transparency: "screenshot";
+	background-color: rgba(7, 54, 66, 0.95);
+}
+
+mainbox {
+	children: [inputbar, listview];
+	spacing: 20px;
+	padding: 20px;
+	border: 0px;
+}
+
+inputbar {
+	padding: 0 10px;
+	children: [entry, case-indicator];
+}
+
+entry {
+	padding: 15px;
+	text-color: @base07;
+	font: "Ubuntu Mono 34";
+}
+
+button, textbox {
+	background-color: @base03;
+	text-color: @base07;
+	padding: 15px;
+}
+
+listview {
+	scrollbar: false;
+	margin: 0px 20px 0 20px;
+}
+
+element normal {
+	background-color: transparent;
+}
+
+element selected {
+	background-color: @base07;
+}
+
+element normal normal, element selected normal, element alternate normal {
+	text-color: @base03;
+}
+
+element normal urgent, element selected urgent, element alternate urgent {
+	text-color: @base05;
+}
+
+element normal active, element selected active, element alternate active {
+	text-color: @base0D;
+}

@@ -1,73 +1,219 @@
-# TMUX
-if which tmux 2>&1 >/dev/null; then
-   #if not inside a tmux session, and if no session is started, start a new session
-   test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
+## Options section
+setopt correct                                                  # Auto correct mistakes
+setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob                                               # Case insensitive globbing
+setopt rcexpandparam                                            # Array expension with parameters
+setopt nocheckjobs                                              # Don't warn about running processes when exiting
+setopt numericglobsort                                          # Sort filenames numerically when it makes sense
+setopt nobeep                                                   # No beep
+setopt appendhistory                                            # Immediately append history instead of overwriting
+setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
+setopt autocd                                                   # if only directory path is entered, cd there.
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' rehash true                              # automatically find new executables in path 
+# Speed up completions
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+HISTFILE=~/.zhistory
 HISTSIZE=1000
-SAVEHIST=1000
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/sandor/.zshrc'
+SAVEHIST=500
+#export EDITOR=/usr/bin/nano
+#export VISUAL=/usr/bin/nano
+WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
-autoload -Uz compinit
-compinit
-autoload -U colors
+
+## Keybindings section
+bindkey -e
+bindkey '^[[7~' beginning-of-line                               # Home key
+bindkey '^[[H' beginning-of-line                                # Home key
+if [[ "${terminfo[khome]}" != "" ]]; then
+  bindkey "${terminfo[khome]}" beginning-of-line                # [Home] - Go to beginning of line
+fi
+bindkey '^[[8~' end-of-line                                     # End key
+bindkey '^[[F' end-of-line                                     # End key
+if [[ "${terminfo[kend]}" != "" ]]; then
+  bindkey "${terminfo[kend]}" end-of-line                       # [End] - Go to end of line
+fi
+bindkey '^[[2~' overwrite-mode                                  # Insert key
+bindkey '^[[3~' delete-char                                     # Delete key
+bindkey '^[[C'  forward-char                                    # Right key
+bindkey '^[[D'  backward-char                                   # Left key
+bindkey '^[[5~' history-beginning-search-backward               # Page up key
+bindkey '^[[6~' history-beginning-search-forward                # Page down key
+
+# Navigate words with ctrl+arrow keys
+bindkey '^[Oc' forward-word                                     #
+bindkey '^[Od' backward-word                                    #
+bindkey '^[[1;5D' backward-word                                 #
+bindkey '^[[1;5C' forward-word                                  #
+bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
+bindkey '^[[Z' undo                                             # Shift+tab undo last action
+
+## Alias section 
+alias cp="cp -i"                                                # Confirm before overwriting something
+alias df='df -h'                                                # Human-readable sizes
+alias free='free -m'                                            # Show sizes in MB
+alias gitu='git add . && git commit && git push'
+
+# Theming section  
+autoload -U compinit colors zcalc
+compinit -d
 colors
 
-# Autoload zsh functions.
-fpath=(~/.zsh/functions $fpath)
-autoload -U ~/.zsh/functions/*(:t)
-# Enable auto-execution of functions.
-typeset -ga preexec_functions
-typeset -ga precmd_functions
-typeset -ga chpwd_functions
-# Append git functions needed for prompt.
-preexec_functions+='preexec_update_git_vars'
-precmd_functions+='precmd_update_git_vars'
-chpwd_functions+='chpwd_update_git_vars'
-# Allow for functions in the prompt.
-setopt PROMPT_SUBST
+# enable substitution for prompt
+setopt prompt_subst
 
-# End of lines added by compinstall
-bindkey "${terminfo[khome]}" beginning-of-line
-bindkey "${terminfo[kend]}" end-of-line
-bindkey "${terminfo[kpp]}" beginning-of-history # PageUp
-bindkey "${terminfo[knp]}" end-of-history # PageDown
-bindkey "${terminfo[kich1]}" quoted-insert # Ins
-bindkey "${terminfo[kdch1]}" delete-char # Del
-bindkey "^[[C" forward-word # [Ctrl-RightArrow] - move forward one word
-bindkey "^[[D" backward-word # [Ctrl-LeftArrow] - move backward one word
-# for rxvt
-#bindkey "\e[7~" beginning-of-line # Home
-#bindkey "\e[8~" end-of-line # End
-# for non RH/Debian xterm, can't hurt for RH/Debian xterm
-#bindkey "\eOH" beginning-of-line
-#bindkey "\eOF" end-of-line
-# for freebsd console
-#bindkey "\e[H" beginning-of-line
-#bindkey "\e[F" end-of-line
+# Prompt (on left side) similar to default bash prompt, or redhat zsh prompt with colors
+ #PROMPT="%(!.%{$fg[red]%}[%n@%m %1~]%{$reset_color%}# .%{$fg[green]%}[%n@%m %1~]%{$reset_color%}$ "
+# Maia prompt
+PROMPT="%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b $HOST >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b " # Print some system information when the shell is first started
+# Print a greeting message when shell is started
+echo $USER@$HOST  $(uname -srm) $(lsb_release -rcs)
+## Prompt on right side:
+#  - shows status of git when in git repository (code adapted from https://techanic.net/2012/12/30/my_git_prompt_for_zsh.html)
+#  - shows exit status of previous command (if previous command finished with an error)
+#  - is invisible, if neither is the case
 
-PROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%}\n$ '
-RPROMPT="%(?..%{$fg[red]%}%? ↵%{$fg[default]%})"
+# Modify the colors and symbols in these variables as desired.
+GIT_PROMPT_SYMBOL="%{$fg[blue]%}±"                              # plus/minus     - clean repo
+GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
+GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
+GIT_PROMPT_AHEAD="%{$fg[red]%}ANUM%{$reset_color%}"             # A"NUM"         - ahead by "NUM" commits
+GIT_PROMPT_BEHIND="%{$fg[cyan]%}BNUM%{$reset_color%}"           # B"NUM"         - behind by "NUM" commits
+GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}⚡︎%{$reset_color%}"     # lightning bolt - merge conflict
+GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}●%{$reset_color%}"       # red circle     - untracked files
+GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}●%{$reset_color%}"     # yellow circle  - tracked files modified
+GIT_PROMPT_STAGED="%{$fg_bold[green]%}●%{$reset_color%}"        # green circle   - staged changes present = ready for "git push"
 
-export EDITOR="vim"
+parse_git_branch() {
+  # Show Git branch/tag, or name-rev if on detached head
+  ( git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD ) 2> /dev/null
+}
 
-# command alias
-alias ls='ls -F --color=auto' 
-alias ll='ls -lh'
-alias drupal='drupal --ansi'
-alias grep='grep --color=auto'
-alias node='nodejs'
+parse_git_state() {
+  # Show different symbols as appropriate for various Git repository states
+  # Compose this value via multiple conditional appends.
+  local GIT_STATE=""
+  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+  if [ "$NUM_AHEAD" -gt 0 ]; then
+    GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
+  fi
+  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+  if [ "$NUM_BEHIND" -gt 0 ]; then
+    GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}
+  fi
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING
+  fi
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED
+  fi
+  if ! git diff --quiet 2> /dev/null; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED
+  fi
+  if ! git diff --cached --quiet 2> /dev/null; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
+  fi
+  if [[ -n $GIT_STATE ]]; then
+    echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
+  fi
+}
 
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/node_modules/.bin"
-eval "$(rbenv init -)"
+git_prompt_string() {
+  local git_where="$(parse_git_branch)"
+  
+  # If inside a Git repository, print its branch and state
+  [ -n "$git_where" ] && echo "$GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX"
+  
+  # If not inside the Git repo, print exit codes of last command (only if it failed)
+  [ ! -n "$git_where" ] && echo "%{$fg[red]%} %(?..[%?])"
+}
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Right prompt with exit status of previous command if not successful
+ #RPROMPT="%{$fg[red]%} %(?..[%?])" 
+# Right prompt with exit status of previous command marked with ✓ or ✗
+ #RPROMPT="%(?.%{$fg[green]%}✓ %{$reset_color%}.%{$fg[red]%}✗ %{$reset_color%})"
 
-ssh-add ~/.ssh/id_rsa &> /dev/null
 
+# Color man pages
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-r
+
+
+## Plugins section: Enable fish style features
+# Use syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Use history substring search
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+# bind UP and DOWN arrow keys to history substring search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up			
+bindkey '^[[B' history-substring-search-down
+
+# Apply different settigns for different terminals
+case $(basename "$(cat "/proc/$PPID/comm")") in
+  login)
+    	RPROMPT="%{$fg[red]%} %(?..[%?])" 
+    	alias x='startx ~/.xinitrc'      # Type name of desired desktop after x, xinitrc is configured for it
+    ;;
+#  'tmux: server')
+#        RPROMPT='$(git_prompt_string)'
+#		## Base16 Shell color themes.
+#		#possible themes: 3024, apathy, ashes, atelierdune, atelierforest, atelierhearth,
+#		#atelierseaside, bespin, brewer, chalk, codeschool, colors, default, eighties, 
+#		#embers, flat, google, grayscale, greenscreen, harmonic16, isotope, londontube,
+#		#marrakesh, mocha, monokai, ocean, paraiso, pop (dark only), railscasts, shapesifter,
+#		#solarized, summerfruit, tomorrow, twilight
+#		#theme="eighties"
+#		#Possible variants: dark and light
+#		#shade="dark"
+#		#BASE16_SHELL="/usr/share/zsh/scripts/base16-shell/base16-$theme.$shade.sh"
+#		#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+#		# Use autosuggestion
+#		source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+#  		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+#     ;;
+  *)
+        RPROMPT='$(git_prompt_string)'
+		# Use autosuggestion
+		source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+  		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+    ;;
+esac
+
+alias cup='docker-compose up'
+alias cmagento='docker-compose -f ~/trellis/magento2-docker-multiproject/docker-compose.yml exec cli /usr/bin/php73 -dmemory_limit=4G /magento2-repos/$(pwd | xargs basename)/bin/magento'
+alias dmagento='docker-compose exec -u 1000 application php -dmemory_limit=4G bin/magento'
+alias crun='docker-compose -f ~/trellis/magento2-docker-multiproject/docker-compose.yml exec cli'
+alias drun='docker-compose exec apache'
+alias credis='docker-compose -f ~/trellis/magento2-docker-multiproject/docker-compose.yml exec redis redis-cli flushall'
+ccomposer() {
+    local cm="cd /magento2-repos/$(pwd | xargs basename) && /usr/bin/php73 -dmemory_limit=4G /usr/local/bin/composer $@"
+    echo $cm
+    docker-compose -f ~/trellis/magento2-docker-multiproject/docker-compose.yml exec cli bash -c "$cm"
+}
+alias dcomposer='docker-compose exec -u 1000 application php -dmemory_limit=4G /usr/local/bin/composer'
+
+source /usr/share/nvm/init-nvm.sh
+source /opt/ros/melodic/setup.zsh
+
+# BEGIN SNIPPET: Magento Cloud CLI configuration
+HOME=${HOME:-'/home/sandor'}
+export PATH="$HOME/"'.magento-cloud/bin':"$PATH"
+if [ -f "$HOME/"'.magento-cloud/shell-config.rc' ]; then . "$HOME/"'.magento-cloud/shell-config.rc'; fi # END SNIPPET
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt/warden/bin:$PATH"

@@ -1,15 +1,7 @@
-! Cursor theme
-xcursor.theme:              Vanilla-DMZ
 Xft.dpi: 192
-Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
 
 URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-URxvt.url-select.launcher:  chromium
+URxvt.url-select.launcher:  brave
 URxvt.url-select.underline: true
 URxvt.keysym.M-u:           perl:url-select:select_next
 URxvt.keysym.M-Escape:      perl:keyboard-select:activate
@@ -18,17 +10,14 @@ URxvt.keysym.Home: \033[1~
 URxvt.keysym.End: \033[4~
 URxvt.keysym.KP_Home: \033[1~
 URxvt.keysym.KP_End: \033[4~
-
 URxvt.scrollBar:          off
 URxvt.secondaryScreen:    1
 URxvt.secondaryScroll:    0
-! HiDPI
-URxvt.font: xft:Roboto Mono:pixelsize=28
-URxvt.boldFont: xft:Roboto Mono:pixelsize=28:style=Bold
+URxvt.font: xft:Droid Sans Mono:size=9
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
 URxvt.cursorBlink:        true
-URxvt.urlLauncher:        /usr/bin/chromium
+URxvt.urlLauncher:        /usr/bin/brave
 URxvt.matcher.button:     1
 URxvt.tabbed.tabbar-fg:   8
 URxvt.tabbed.tabbar-bg:   0
@@ -37,16 +26,27 @@ URxvt.tabbed.tab-bg:      0
 URxvt.tabbed.new-button:  no
 URxvt.tabbed.title:       no
 URxvt.visualBell:         true
-
-!URxvt.transparent: true
-!URxvt.shading: 10
+URxvt.transparent: false
 URxvt.depth: 32
 
-URxvt*background:         [90]#002b36
-URxvt*foreground:         #657b83
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
+
+!!Source http://github.com/altercation/solarized
+
+*background: #002b36
+*foreground: #839496
+!!*fading: 40
+*fadeColor: #002b36
 *cursorColor: #93a1a1
 *pointerColorBackground: #586e75
 *pointerColorForeground: #93a1a1
+
 !! black dark/light
 *color0: #073642
 *color8: #002b36
@@ -78,14 +78,3 @@ URxvt*foreground:         #657b83
 !! white dark/light
 *color7: #eee8d5
 *color15: #fdf6e3
-
-! ROFI Color theme
-rofi.color-enabled: true
-rofi.color-window: #262626, #262626, #262626
-rofi.color-normal: #262626, #f3f4f5, #202020, #4fafff, #000000
-rofi.color-active: #002b37, #008ed4, #003643, #008ed4, #66c6ff
-rofi.color-urgent: #002b37, #da4281, #003643, #008ed4, #890661
-
-! xscreensaver
-xscreensaver.fade:        false
-xscreensaver.unfade:      false
