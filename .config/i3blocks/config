@@ -31,13 +31,13 @@ markup=none
 [window]
 command=$SCRIPT_DIR/window
 interval=1
-color=#268bd2
+color=#93a1a1
 
 [weather New York example]
 command=$SCRIPT_DIR/weather "EUR|UK|UK002|LESMAHAGOW"
 interval=900
 label=W 
-color=#fdf6e3
+color=#93a1a1
 
 [memory]
 command=$SCRIPT_DIR/memory
@@ -46,7 +46,7 @@ command=$SCRIPT_DIR/memory
 #label= 
 label= 
 interval=30
-color=#d33682
+color=#93a1a1
 #align=center
 separator=false
 separator_block_width=7
@@ -56,7 +56,7 @@ command=$SCRIPT_DIR/cpu
 #label= 
 label= 
 interval=5
-color=#6c71c4
+color=#93a1a1
 min_width=00%
 #align=center
 
@@ -70,11 +70,11 @@ min_width=00%
 [bandwidth]
 #instance=eth0
 interval=5
-color=#268bd2
+color=#93a1a1
 command=$SCRIPT_DIR/bandwidth
 
 [volume-pulseaudio]
-command=$SCRIPT_DIR/volume-pulseaudio -C '#2aa198' -F '${SYMB} ${VOL}%'
+command=$SCRIPT_DIR/volume-pulseaudio -C '#93a1a1' -F '${SYMB} ${VOL}%'
 interval=1
 signal=10
 #label=VOL
@@ -101,4 +101,11 @@ signal=10
 [time]
 command=date +"%y-%m-%d %T"
 interval=5
-color=#859900
+color=#93a1a1
+
+[language]
+color=#93a1a1
+label=🌐 
+command=$SCRIPT_DIR/language-printer
+interval=once
+signal=7
