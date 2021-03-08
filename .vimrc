@@ -4,10 +4,6 @@ syntax on
 filetype plugin indent on
 set nobackup
 
-let g:molokai_original = 1
-set t_Co=256
-colorscheme molokai
-
 " keyboard mappings
 map <C-n> :NERDTreeToggle<CR>
 
@@ -20,3 +16,6 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 set guifont=terminus\ 14px
+set expandtab
+set shiftwidth=4
+set tabstop=4
