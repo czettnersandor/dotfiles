@@ -16,6 +16,6 @@ fi
 
 # Click Actions
 case "$BLOCK_BUTTON" in
-    1) $SCRIPT_DIR/language & ;;    # left click
-    3) $SCRIPT_DIR/language & ;;    # right click
+    1) $SCRIPT_DIR/language && pkill -RTMIN+7 i3blocks;;    # left click
+    3) $SCRIPT_DIR/language && pkill -RTMIN+7 i3blocks;;    # right click
 esac

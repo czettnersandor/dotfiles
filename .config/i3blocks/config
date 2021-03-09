@@ -107,5 +107,5 @@ color=#93a1a1
 color=#93a1a1
 label=🌐 
 command=$SCRIPT_DIR/language-printer
-interval=once
+interval=5
 signal=7
