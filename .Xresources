@@ -16,7 +16,6 @@ URxvt.secondaryScroll:    0
 URxvt.font: xft:Droid Sans Mono:size=9
 URxvt.selectToClipboard:  true
 URxvt.saveLines:          10000
-URxvt.cursorBlink:        true
 URxvt.urlLauncher:        /usr/bin/brave
 URxvt.matcher.button:     1
 URxvt.tabbed.tabbar-fg:   8
@@ -28,6 +27,7 @@ URxvt.tabbed.title:       no
 URxvt.visualBell:         true
 URxvt.transparent: false
 URxvt.depth: 32
+URxvt*background: rgba:0000/2b00/3600/E900
 
 ! Cursor
 URxvt.cursorBlink:          true
